@@ -1,6 +1,7 @@
 import json
 import pprint
-import config
+import config, utilities
+
 import requests # type: ignore
 from flask import Flask, request, render_template # type: ignore
 
