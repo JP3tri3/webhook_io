@@ -12,9 +12,9 @@ def home():
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    print(pprint.pprint(request.data))
+    
     data = json.loads(request.data)
-
+    
     if data['passphrase'] != config.WEBHOOK_PASSPHRASE:
         return {
             "code": "error",
@@ -23,6 +23,7 @@ def webhook():
     else:
 
             if data:
+                print(pprint.pprint(data))
                 r = requests.post(config.OUTGOING_WEBHOOK_URL, data=json.dumps(data), headers={'Content-Type': 'application/json'})
                 return {
                     "code": "success",
