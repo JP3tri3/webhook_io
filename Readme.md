@@ -1,4 +1,4 @@
-This application works to resolve issues with 3rd party exchanges that allow single webhook input triggers.  This application can be configured to receive multiple webhooks, check for the configured variables to match, then output a single trigger via webhook.
+This application works to resolve issues with 3rd party exchanges that allow single webhook input triggers.  This application can be configured to receive multiple webhooks, check for the configured variables to match, then output a single trigger via webhook.  Currently implemented with a 3 trigger strategy example, can be expanded by updating strategy.py and db.json.
 
 # Steps:
 - pip install packages located in requirements.txt
