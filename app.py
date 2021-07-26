@@ -5,18 +5,15 @@ from flask import Flask, request, jsonify, render_template # type: ignore
 
 app = Flask(__name__)
 myTime = int(time.time() * 1000)
-trendFlag = False
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    # print(request.data)
+    print(request.data)
     data = json.loads(request.data)
-    trend = data["strategy"]["flag"]
 
     if data['passphrase'] != config.WEBHOOK_PASSPHRASE:
         return {
@@ -25,20 +22,7 @@ def webhook():
         }
     else:
 
-        # print(data['ticker'])
-        # print(data['bar'])
-
-        if (trendFlag == False):
-            return {
-                "code": "downtrend, waiting"
-            }
-        else:
-            side = data['strategy']['order_action'].upper()
-            quantity = data['strategy']['order_contracts']
-            ticker = data['ticker']
-            test_data = 
-
-            if order_response:
+            if data:
                 return {
                     "code": "success",
                     "message": "order executed"
