@@ -1,7 +1,9 @@
 import json
 import time
+import pprint
 import config
-from flask import Flask, request, jsonify, render_template # type: ignore
+import requests # type: ignore
+from flask import Flask, request, render_template # type: ignore
 
 app = Flask(__name__)
 myTime = int(time.time() * 1000)
@@ -12,7 +14,7 @@ def home():
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    print(request.data)
+    print(pprint.pprint(request.data))
     data = json.loads(request.data)
 
     if data['passphrase'] != config.WEBHOOK_PASSPHRASE:
@@ -23,6 +25,7 @@ def webhook():
     else:
 
             if data:
+                r = requests.post(config.OUTGOING_WEBHOOK_URL, data=json.dumps(data), headers={'Content-Type': 'application/json'})
                 return {
                     "code": "success",
                     "message": "order executed"
