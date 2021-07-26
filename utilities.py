@@ -22,10 +22,12 @@ def update_data(name_input, key_input, valueInput):
         access_file.close()
 
         json_object[name][key] = value
+        return_object = json_object[name]
 
         access_file = open("db.json", "w")
         json.dump(json_object, access_file, indent=4)
         access_file.close()
+        return return_object
     except Exception as e:
         print("an exception occured - {}".format(e))
         update_data(name, key, value)

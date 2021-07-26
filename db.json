@@ -1,5 +1,14 @@
 {
-    "trigger_1": "test",
-    "trigger_2": "test",
-    "trigger_3": "test"
+    "ETH": {
+        "current_state": "none",
+        "trigger_1": 0,
+        "trigger_2": 0,
+        "trigger_3": 0
+    },
+    "BTC": {
+        "current_state": "none",
+        "trigger_1": 0,
+        "trigger_2": 0,
+        "trigger_3": 0
+    }
 }

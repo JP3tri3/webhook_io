@@ -11,8 +11,9 @@ Steps:
 
 {
     "passphrase": "temp_passphrase",
-    "timeframe": "4m",
-    "trigger_1": "test"
+    "symbol": "ETH",
+	  "trigger": "trigger_1",
+	  "input": 0
 }
 
 - use command 'flask run' to run application
