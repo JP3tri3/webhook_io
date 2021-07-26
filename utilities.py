@@ -31,3 +31,14 @@ def update_data(name_input, key_input, valueInput):
     except Exception as e:
         print("an exception occured - {}".format(e))
         update_data(name, key, value)
+
+def refresh_data():
+    update_data('ETH', 'current_state', 'none')
+    update_data('ETH', 'trigger_1', -1)
+    update_data('ETH', 'trigger_2', -1)
+    update_data('ETH', 'trigger_3', -1)
+
+    update_data('BTC', 'current_state', 'none')
+    update_data('BTC', 'trigger_1', -1)
+    update_data('BTC', 'trigger_2', -1)
+    update_data('BTC', 'trigger_3', -1)
