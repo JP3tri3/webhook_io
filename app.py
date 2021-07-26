@@ -1,12 +1,10 @@
 import json
-import time
 import pprint
 import config
 import requests # type: ignore
 from flask import Flask, request, render_template # type: ignore
 
 app = Flask(__name__)
-myTime = int(time.time() * 1000)
 
 @app.route('/')
 def home():
