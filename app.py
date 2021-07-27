@@ -58,7 +58,7 @@ async def webhook(request):
                     else strat_output
 
                 utilities.update_data(symbol, 'current_state', strat_output)
-                r = requests.post(config.OUTGOING_WEBHOOK_URL, data=json.dumps(exchange_payload), headers={'Content-Type': 'application/json'})
+                r = requests.post(config.OUTGOING_WEBHOOK_URL, data=exchange_payload, headers={'Content-Type': 'application/json'})
             
             return json({
                 "code": "success",
