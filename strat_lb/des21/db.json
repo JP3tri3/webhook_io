@@ -1,0 +1,14 @@
+{
+    "ETH": {
+        "current_state": "none",
+        "2m": -1,
+        "16m": -1,
+        "96m": -1
+    },
+    "BTC": {
+        "current_state": "none",
+        "2m": -1,
+        "16m": -1,
+        "96m": -1
+    }
+}

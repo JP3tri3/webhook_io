@@ -1,0 +1,44 @@
+import json
+
+def view_data(name_input, key_input):
+    name = name_input
+    key = key_input
+    try:
+        with open('db.json') as f:
+            data = json.load(f)
+            f.close()
+        return data[name][key]
+    except Exception as e:
+        print("an exception occured - {}".format(e))
+        view_data(name, key)
+
+def update_data(name_input, key_input, valueInput):
+    name = name_input
+    key = key_input
+    value = valueInput
+    try:
+        access_file = open("db.json", "r")
+        json_object = json.load(access_file)
+        access_file.close()
+
+        json_object[name][key] = value
+        return_object = json_object[name]
+
+        access_file = open("db.json", "w")
+        json.dump(json_object, access_file, indent=4)
+        access_file.close()
+        return return_object
+    except Exception as e:
+        print("an exception occured - {}".format(e))
+        update_data(name, key, value)
+
+def refresh_data():
+    update_data('ETH', 'current_state', 'none')
+    update_data('ETH', '2m', -1)
+    update_data('ETH', '16m', -1)
+    update_data('ETH', '96m', -1)
+
+    update_data('BTC', 'current_state', 'none')
+    update_data('BTC', '2m', -1)
+    update_data('BTC', '16m', -1)
+    update_data('BTC', '96m', -1)
