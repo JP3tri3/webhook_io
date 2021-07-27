@@ -1,10 +1,10 @@
 import json
 import pprint
 import config, utilities, strategy
-import requests # type: ignore
-from flask import Flask, request, render_template # type: ignore
+from sanic import Sanic # type: ignore
+from sanic.response import json # type: ignore
 
-app = Flask(__name__)
+app = Sanic(__name__)
 
 # set to True to reset db.json
 refresh_data = False
@@ -13,14 +13,10 @@ if refresh_data:
     print(f'\nrefreshing json:')
     utilities.refresh_data()
 
-@app.route('/')
-def home():
-    return render_template('index.html')
-
 @app.route('/webhook', methods=['POST'])
-def webhook():
+async def webhook(request):
     
-    data = json.loads(request.data)
+    data = request.json
     
     if data['passphrase'] != config.WEBHOOK_PASSPHRASE:
         return {
@@ -74,3 +70,6 @@ def webhook():
                 "code": "error",
                 "message": "process failed"
             }
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000, debug=True)
