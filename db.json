@@ -1,6 +1,6 @@
 {
     "ETH": {
-        "current_state": "open_short",
+        "current_state": "none",
         "trigger_1": -1,
         "trigger_2": -1,
         "trigger_3": -1

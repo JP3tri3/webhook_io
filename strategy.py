@@ -1,7 +1,4 @@
 
-from os import close
-
-
 def determine_trigger(data):
     current_state = data['current_state']
     trigger_1 = data['trigger_1']
