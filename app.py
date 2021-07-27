@@ -53,6 +53,7 @@ async def webhook(request):
 
                 elif (strat_output == 'close_short'):
                     exchange_payload = config.close_short
+                    
                 print(f'\nsending payload to exchange')
 
                 strat_output = 'none' if (strat_output == 'close_long') or (strat_output == 'close_short') \
