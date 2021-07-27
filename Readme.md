@@ -12,7 +12,7 @@ This application works to resolve issues with 3rd party exchanges that allow sin
     "passphrase": "temp_passphrase",
     "symbol": "ETH",
 	  "trigger": "trigger_1",
-	  "input": 0
+	  "value": 0
 }
 
 # payload explanation:
