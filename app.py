@@ -3,10 +3,11 @@ import pprint
 import config, utilities, strategy
 from sanic import Sanic # type: ignore
 from sanic.response import json # type: ignore
+import requests # type: ignore
 
 app = Sanic(__name__)
 
-# set to True to reset db.json
+# set to True to reset 
 refresh_data = False
 
 if refresh_data:
@@ -59,17 +60,17 @@ async def webhook(request):
                 utilities.update_data(symbol, 'current_state', strat_output)
                 r = requests.post(config.OUTGOING_WEBHOOK_URL, data=json.dumps(exchange_payload), headers={'Content-Type': 'application/json'})
             
-            return {
+            return json({
                 "code": "success",
                 "message": "payload processed"
-            }
+            })
 
         else:
             print("ERROR: process failed")
-            return {
+            return json ({
                 "code": "error",
                 "message": "process failed"
-            }
+            })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)

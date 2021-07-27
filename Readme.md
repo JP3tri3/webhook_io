@@ -26,4 +26,4 @@ This application works to resolve issues with 3rd party exchanges that allow sin
 
 # how to run:
 - navigate to directory in terminal
-- use command 'flask run' to run application
+- use command 'python app.py' to run application
