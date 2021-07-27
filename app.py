@@ -1,14 +1,12 @@
-import json
-import pprint
-import config, utilities, strategy
+from json import dumps
+import config, utilities, strategy, pprint, requests # type: ignore
 from sanic import Sanic # type: ignore
 from sanic.response import json # type: ignore
-import requests # type: ignore
 
 app = Sanic(__name__)
 
-# set to True to reset 
-refresh_data = False
+# set 'refresh_data' to False to save json data between after script stop/start
+refresh_data = True
 
 if refresh_data:
     print(f'\nrefreshing json:')
@@ -33,12 +31,15 @@ async def webhook(request):
             symbol = data['symbol']
             trigger = data['trigger']
             trigger_value = data['value']
-            triggers_object = utilities.update_data(symbol, trigger, trigger_value)
 
             print(f'\nchecking object:')
-            print(pprint.pprint(triggers_object))
+            triggers_object = utilities.update_data(symbol, trigger, trigger_value)
+            print(triggers_object)
+            print('')
+
             strat_output = strategy.determine_trigger(triggers_object)
-            print(f'strat_output: {strat_output}')
+            print(f'state change: {strat_output}')
+
             if (strat_output != "none"):
                 
                 if (strat_output == 'open_long'):
@@ -58,7 +59,8 @@ async def webhook(request):
                     else strat_output
 
                 utilities.update_data(symbol, 'current_state', strat_output)
-                r = requests.post(config.OUTGOING_WEBHOOK_URL, data=exchange_payload, headers={'Content-Type': 'application/json'})
+
+                r = requests.post(config.OUTGOING_WEBHOOK_URL, data=dumps(exchange_payload), headers={'Content-Type': 'application/json'})
             
             return json({
                 "code": "success",
@@ -67,7 +69,7 @@ async def webhook(request):
 
         else:
             print("ERROR: process failed")
-            return json ({
+            return json({
                 "code": "error",
                 "message": "process failed"
             })
