@@ -11,7 +11,7 @@ This application works to resolve issues with 3rd party exchanges that allow sin
 {
     "passphrase": "temp_passphrase",
     "symbol": "ETH",
-	"tf": 2m,
+	"tf": "2m",
 	"value": 0
 }
 
