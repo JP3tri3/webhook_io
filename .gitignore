@@ -33,3 +33,7 @@ instance/
 .venv
 env/
 venv/
+
+# configs
+config.py
+des21/config.py
