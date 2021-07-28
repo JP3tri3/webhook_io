@@ -2,6 +2,7 @@ from json import dumps
 import config, utilities, strategy, pprint, requests # type: ignore
 from sanic import Sanic # type: ignore
 from sanic.response import json # type: ignore
+import messaging
 
 app = Sanic(__name__)
 
@@ -62,7 +63,14 @@ async def webhook(request):
                 utilities.update_data(symbol, 'current_state', strat_output)
 
                 r = requests.post(config.OUTGOING_WEBHOOK_URL, data=dumps(exchange_payload), headers={'Content-Type': 'application/json'})
-            
+
+                notification = messaging.handle_discord_messages(symbol, strat_output)
+                print(f'sending notification: {notification}')
+
+                r = requests.post(config.OUTGOING_WEBHOOK_URL_MESSAGING, data=dumps(notification), headers={'Content-Type': 'application/json'})
+
+
+
             return json({
                 "code": "success",
                 "message": "payload processed"
