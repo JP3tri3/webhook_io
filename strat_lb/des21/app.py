@@ -57,18 +57,10 @@ async def webhook(request):
 
                 if (strat_output != "none"):
                     symbol_info = config.SYMBOLS[symbol]
-                    if (strat_output == 'open_long'):
-                        exchange_payload = symbol_info['open_long']
+                    exchange_payload = symbol_info[strat_output]
+                    print("Test")
+                    print(exchange_payload)
                     
-                    elif (strat_output == 'open_short'):
-                        exchange_payload = symbol_info['open_short']
-
-                    elif (strat_output == 'close_long'):
-                        exchange_payload = symbol_info['close_long']
-
-                    elif (strat_output == 'close_short'):
-                        exchange_payload = symbol_info['close_short']
-                        
                     print(f'\nsending payload to exchange')
 
                     strat_output = 'none' if (strat_output == 'close_long') or (strat_output == 'close_short') \
@@ -78,10 +70,10 @@ async def webhook(request):
 
                     r = requests.post(config.OUTGOING_WEBHOOK_URL, data=dumps(exchange_payload), headers={'Content-Type': 'application/json'})
 
-                    notification = messaging.handle_discord_messages(symbol, strat_output)
-                    print(f'sending notification: {notification}')
+                    notification_payload = messaging.handle_discord_messages(symbol, config.NOTIFICATIONS[strat_output])
+                    print(f'sending notification: {notification_payload}')
 
-                    r = requests.post(config.OUTGOING_WEBHOOK_URL_MESSAGING, data=dumps(notification), headers={'Content-Type': 'application/json'})
+                    r = requests.post(config.OUTGOING_WEBHOOK_URL_MESSAGING, data=dumps(notification_payload), headers={'Content-Type': 'application/json'})
 
                 return json({
                     "code": "success",
