@@ -1,18 +1,48 @@
 import json
 
-def view_data(name_input, key_input):
-    name = name_input
-    key = key_input
+def view_all_symbol_objects():
     try:
         with open('db.json') as f:
             data = json.load(f)
             f.close()
-        return data[name][key]
+        return data
     except Exception as e:
         print("an exception occured - {}".format(e))
-        view_data(name, key)
 
-def update_data(name_input, key_input, valueInput):
+def view_data_object(name_input):
+    try:
+        with open('db.json') as f:
+            data = json.load(f)
+            f.close()
+        return data[name_input]
+    except Exception as e:
+        print("an exception occured - {}".format(e))
+
+def view_data(name_input, key_input):
+    try:
+        with open('db.json') as f:
+            data = json.load(f)
+            f.close()
+        return data[name_input][key_input]
+    except Exception as e:
+        print("an exception occured - {}".format(e))
+        view_data(name_input, key_input)
+
+def add_db_symbol_k_v(symbol, value):
+    try:
+        access_file = open("db.json", "r")
+        json_object = json.load(access_file)
+        access_file.close()
+
+        json_object[symbol]= value
+
+        access_file = open("db.json", "w")
+        json.dump(json_object, access_file, indent=4)
+        access_file.close()
+    except Exception as e:
+        print("an exception occured - {}".format(e))
+
+def update_db_object_value(name_input, key_input, valueInput):
     name = name_input
     key = key_input
     value = valueInput
@@ -30,15 +60,17 @@ def update_data(name_input, key_input, valueInput):
         return return_object
     except Exception as e:
         print("an exception occured - {}".format(e))
-        update_data(name, key, value)
 
-def refresh_data():
-    update_data('ETH', 'current_state', 'none')
-    update_data('ETH', 'trigger_1', -1)
-    update_data('ETH', 'trigger_2', -1)
-    update_data('ETH', 'trigger_3', -1)
+def clear_db_object(symbol):
+    try:
+        access_file = open("db.json", "r")
+        json_object = json.load(access_file)
+        access_file.close()
 
-    update_data('BTC', 'current_state', 'none')
-    update_data('BTC', 'trigger_1', -1)
-    update_data('BTC', 'trigger_2', -1)
-    update_data('BTC', 'trigger_3', -1)
+        json_object[symbol] = {}
+
+        access_file = open("db.json", "w")
+        json.dump(json_object, access_file, indent=4)
+        access_file.close()
+    except Exception as e:
+        print("an exception occured - {}".format(e))
