@@ -6,10 +6,6 @@ import messaging
 
 app = Sanic(__name__)
 
-# set 'update_db' to False to save json data between after script stop/start
-# set to True to refresh data, as well if adding any new coins to run
-update_db = True
-
 def handle_symbol_db(args):
     if (args):
         print(f'\nupdating database:')
@@ -24,7 +20,7 @@ def handle_symbol_db(args):
             print(f'adding symbol: {symbol}')
             utilities.add_db_symbol_k_v(symbol, db_symbol_object)
 
-handle_symbol_db(update_db)
+handle_symbol_db(config.UPDATE_DB)
 
 @app.route('/webhook', methods=['POST'])
 async def webhook(request):

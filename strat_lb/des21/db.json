@@ -1,14 +1,20 @@
 {
     "ETH": {
         "current_state": "none",
-        "2m": -1,
-        "16m": -1,
-        "96m": -1
+        "vwap6h": 0,
+        "wave6h": 0,
+        "vwap3h": 0,
+        "vwap25m": 0,
+        "MVAlgo25m": 0,
+        "Supertrend25m": 0
     },
     "BTC": {
         "current_state": "none",
-        "2m": -1,
-        "16m": -1,
-        "96m": -1
+        "vwap6h": 0,
+        "wave6h": 0,
+        "vwap3h": 0,
+        "vwap25m": 0,
+        "MVAlgo25m": 0,
+        "Supertrend25m": 0
     }
 }
