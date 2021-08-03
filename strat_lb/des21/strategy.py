@@ -26,7 +26,7 @@ def determine_trigger(data):
 
         elif (current_state == 'open_short'):
             if (MVAlgo25m_val == 1) or (Supertrend25m_val == 1) or (vwap3h_val > 0):
-                new_state = 'close_long'
+                new_state = 'close_short'
             else:
                 new_state = 'none'
 

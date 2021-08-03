@@ -1,10 +1,10 @@
 {
     "ETH": {
         "current_state": "none",
-        "vwap6h": 0,
-        "wave6h": 0,
-        "vwap3h": 0,
-        "vwap25m": 0,
+        "vwap6h": 1,
+        "wave6h": 1,
+        "vwap3h": 1,
+        "vwap25m": 1,
         "MVAlgo25m": 0,
         "Supertrend25m": 0
     },
