@@ -19,16 +19,16 @@ def determine_trigger(data):
                 new_state = 'none'
 
         elif (current_state == 'open_long'):
-                if (MVAlgo25m_val == 0) or (Supertrend25m_val == 0) or (vwap3h_val < 0):
-                    new_state = 'close_long' 
-                else:
-                    new_state = 'none'
+            if (MVAlgo25m_val == 0) or (Supertrend25m_val == 0) or (vwap3h_val < 0):
+                new_state = 'close_long' 
+            else:
+                new_state = 'none'
 
-            elif (current_state == 'open_short'):
-                if (MVAlgo25m_val == 1) or (Supertrend25m_val == 1) or (vwap3h_val > 0):
-                    new_state = 'close_long'
-                else:
-                    new_state = 'none'
+        elif (current_state == 'open_short'):
+            if (MVAlgo25m_val == 1) or (Supertrend25m_val == 1) or (vwap3h_val > 0):
+                new_state = 'close_long'
+            else:
+                new_state = 'none'
 
         else:
             new_state = 'none'
